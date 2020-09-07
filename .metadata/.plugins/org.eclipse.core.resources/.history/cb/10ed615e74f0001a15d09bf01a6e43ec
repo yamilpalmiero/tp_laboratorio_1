@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <conio.h>
+#include <ctype.h>
+
+int sumar(int x, int y){
+	int resultado;
+	resultado=x+y;
+	return resultado;
+}
+
+int restar(int x, int y){
+	int resultado;
+	resultado=x-y;
+	return resultado;
+}
+
+float sdividir(int x, int y){
+	int resultado;
+	resultado=x/y;
+	return resultado;
+}
+
+int multiplicar(int x, int y){
+	int resultado;
+	resultado=x*y;
+	return resultado;
+}

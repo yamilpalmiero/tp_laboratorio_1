@@ -1,0 +1,14 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <conio.h>
+#include <ctype.h>
+#include "funciones.h"
+
+int main(void) {
+	setbuf(stdout, NULL);
+
+	printf("*****MENU*****");
+	printf
+
+	return 0;
+}

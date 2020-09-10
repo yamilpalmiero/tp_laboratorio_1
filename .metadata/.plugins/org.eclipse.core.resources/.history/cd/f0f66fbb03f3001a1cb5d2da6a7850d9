@@ -31,7 +31,6 @@ int main(void) {
 			printf("\n5- Salir.");
 		} else if (flag1 == 1 && flag2 == 0) {
 			system("cls");
-			printf("\n*****MENU*****\n");
 			printf("\n1- Ingrese 1er operando (A=%d).", num1);
 			printf("\n2- Inrgese 2do operando (B=y).");
 			printf("\n3- Calcular todas las operaciones.");
@@ -39,7 +38,6 @@ int main(void) {
 			printf("\n5- Salir.");
 		} else if (flag1 == 0 && flag2 == 1) {
 			system("cls");
-			printf("\n*****MENU*****\n");
 			printf("\n1- Ingrese 1er operando (A=x).");
 			printf("\n2- Inrgese 2do operando (B=%d).", num2);
 			printf("\n3- Calcular todas las operaciones.");
@@ -47,7 +45,6 @@ int main(void) {
 			printf("\n5- Salir.");
 		} else {
 			system("cls");
-			printf("\n*****MENU*****\n");
 			printf("\n1- Ingrese 1er operando (A=%d).", num1);
 			printf("\n2- Inrgese 2do operando (B=%d).", num2);
 			printf("\n3- Calcular todas las operaciones.");

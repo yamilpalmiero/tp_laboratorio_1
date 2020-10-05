@@ -86,15 +86,112 @@ int findEmployeeById(Employee *list, int len, int id, int *posicion) {
 	return retorno;
 }
 //----------------------------------------------------------------------------------------------------------
-int removeEmployee(Employee *list, int len, int id) {
-	return -1;
+int modifyEmployee(Employee *list, int len) {
+	int retorno = -1;
+	int posicion;
+	int id;
+	int opcion;
+
+	if (list != NULL && len > 0) {
+		printEmployees(list, len);
+		utn_getEntero(&id, "\nId a modificar: ", "\nError", 0, 999, 2);
+		if (findEmployeeById(list, len, id, &posicion) == -1) {
+			printf("\nEl id ingresado no existe.");
+		} else {
+			do {
+				printf(
+						"\nPosicion: %d\nId: %d\nNombre: %s\nApellido: %s\nSalario: %.2f\nSector: %d\n",
+						posicion, list[posicion].id, list[posicion].name,
+						list[posicion].lastName, list[posicion].salary,
+						list[posicion].sector);
+				utn_getEntero(&opcion,
+						"\nModificar: \n\n1-Nombre \n2-Apellido \n3-Salario \n4-Sector \n5-Salir\n",
+						"\nError", 1, 5, 2);
+				switch (opcion) {
+				case 1:
+					utn_getCadena(list[posicion].name, "\nNombre: ", "\nError",
+							1, 51, 2);
+					break;
+				case 2:
+					utn_getCadena(list[posicion].lastName, "\nApellido: ",
+							"\nError", 1, 51, 2);
+					break;
+				case 3:
+					utn_getFlotante(&list[posicion].salary, "\nSalario: ",
+							"\nError.", 1, 1000000, 2);
+					break;
+				case 4:
+					utn_getEntero(&list[posicion].sector, "\nSector: ",
+							"\nError.", 1, 100, 2);
+					break;
+				case 5:
+					break;
+				default:
+					printf("\nOpcion invalida");
+				}
+			} while (opcion != 5);
+			retorno = 0;
+		}
+	}
+	return retorno;
+}
+//----------------------------------------------------------------------------------------------------------
+int removeEmployee(Employee *list, int len) {
+	int retorno = -1;
+	int posicion;
+	int id;
+
+	if (list != NULL && len > 0) {
+		utn_getEntero(&id, "\nId a eliminar: ", "\nError.", 0, 999, 2);
+		if (findEmployeeById(list, len, id, &posicion) == -1) {
+			printf("\nEl id ingresado no existe.");
+		} else {
+			list[posicion].isEmpty = 1;
+			retorno = 0;
+		}
+	}
+
+	return retorno;
 }
 //----------------------------------------------------------------------------------------------------------
 int sortEmployees(Employee *list, int len, int order) {
 	return 0;
 }
 //----------------------------------------------------------------------------------------------------------
-int printEmployees(Employee *list, int length) {
-	return 0;
+int printEmployees(Employee *list, int len) {
+	int retorno = -1;
+	int i;
+	if (list != NULL && len >= 0) {
+		for (i = 0; i < len; i++) {
+			if (list[i].isEmpty == 1) {
+				continue;
+			} else
+				printf(
+						"\nPosicion: %d\nId: %d\nNombre: %s\nApellido: %s\nSalario: %.2f\nSector: %d\n",
+						i, list[i].id, list[i].name, list[i].lastName,
+						list[i].salary, list[i].sector);
+		}
+		retorno = 0;
+	}
+
+	return retorno;
+}
+//----------------------------------------------------------------------------------------------------------
+int CalcularPromedioSalario(Employee *list, int len, float *pResultado) {
+	int retorno = -1;
+	int i;
+	float suma = 0;
+	int contador = 0;
+
+	for (i = 0; i < len; i++) {
+		if (list[i].isEmpty == 0) {
+			suma += list[i].salary;
+			contador++;
+		}
+	}
+	retorno = 0;
+	*pResultado = suma / contador;
+
+	return retorno;
 }
 //----------------------------------------------------------------------------------------------------------

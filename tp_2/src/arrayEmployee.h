@@ -56,6 +56,14 @@ int addEmployee(Employee *list, int len, int id, char name[], char lastName[],
  **/
 int findEmployeeById(Employee *list, int len, int id, int *posicion);
 
+/*
+ * brief Busca un empleado por su id y modifica el campo requerido
+ * param list Array de empleados
+ * param len Tamaño del array
+ * return Retorna 0 si salio OK y -1 si no
+ */
+int modifyEmployee(Employee *list, int len);
+
 /** \brief Remove a Employee by Id (put isEmpty Flag in 1)
  *
  * \param list Employee*
@@ -64,7 +72,7 @@ int findEmployeeById(Employee *list, int len, int id, int *posicion);
  * \return int Return (-1) if Error [Invalid length or NULL pointer or if can't
  find a employee] - (0) if Ok
  **/
-int removeEmployee(Employee *list, int len, int id);
+int removeEmployee(Employee *list, int len);
 
 /** \brief Sort the elements in the array of employees, the argument order
  indicate UP or DOWN order
@@ -85,3 +93,12 @@ int sortEmployees(Employee *list, int len, int order);
  *
  */
 int printEmployees(Employee *list, int length);
+
+/*
+ * brief Recibe el array de empleados y calcula el promedio de todos los salarios
+ * param list Array de empleados
+ * param len Longitud del array
+ * param pResultado Puntero al espacio de memoria donde se va a guardar el promedio
+ * return Retorna 0 si OK y -1 si no
+ */
+int CalcularPromedioSalario(Employee *list, int len, float *pResultado);

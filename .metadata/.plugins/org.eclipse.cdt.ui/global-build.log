@@ -1,5 +1,4 @@
-20:56:59 **** Incremental Build of configuration Debug for project tp_2 ****
+20:01:59 **** Incremental Build of configuration Debug for project tp_2 ****
 Info: Internal Builder is used for build
-gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\tp_2.o" "..\\src\\tp_2.c" 
-gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\arrayEmployees.o" "..\\src\\arrayEmployees.c" 
-gcc -o tp_2.exe "src\\arrayEmployees.o" "src\\tp_2.o" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\utn.o" "..\\src\\utn.c" 
+gcc -o tp_2.exe "src\\array.o" "src\\arrayEmployee.o" "src\\tp_2.o" "src\\utn.o" 

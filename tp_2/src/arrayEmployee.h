@@ -1,8 +1,6 @@
 #ifndef ARRAYEMPLOYEES_H_
 #define ARRAYEMPLOYEES_H_
 
-#endif /* ARRAYEMPLOYEES_H_ */
-
 typedef struct {
 	int id;
 	char name[51];
@@ -11,6 +9,8 @@ typedef struct {
 	int sector;
 	int isEmpty;
 } Employee;
+
+#endif /* ARRAYEMPLOYEES_H_ */
 
 /** brief To indicate that all position in the array are empty,
  * this function put the flag (isEmpty) in TRUE in all
@@ -21,6 +21,15 @@ typedef struct {
  *
  **/
 int initEmployees(Employee *list, int len);
+
+/*
+ * brief Recorre el array de empleados y devuelve el primer lugar vacio que encuentra
+ * param list Array de empleados
+ * param len Longitud del array
+ * param posicion Puntero al espacio de memoria donde se va a guardar la posicion libre que encontro
+ * return Retorna 0 si encuentra un espacio libre y -1 si no
+ */
+int buscarLibre(Employee *list, int len, int *posicion);
 
 /** \brief add in a existing list of employees the values received as parameters
  * in the first empty position
@@ -45,7 +54,7 @@ int addEmployee(Employee *list, int len, int id, char name[], char lastName[],
  * \return Return employee index position or (-1) if [Invalid length or NULL
  pointer received or employee not found]
  **/
-int findEmployeeById(Employee *list, int len, int id);
+int findEmployeeById(Employee *list, int len, int id, int *posicion);
 
 /** \brief Remove a Employee by Id (put isEmpty Flag in 1)
  *
@@ -76,4 +85,3 @@ int sortEmployees(Employee *list, int len, int order);
  *
  */
 int printEmployees(Employee *list, int length);
-

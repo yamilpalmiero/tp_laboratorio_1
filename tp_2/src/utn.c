@@ -164,8 +164,8 @@ int menu() {
 
 	system("cls");
 
-	printf("Seleccioone una opcion:\n\n");
-	printf("1- Alta alumno.\n");
+	printf("\n\nSeleccione una opcion:\n\n");
+	printf("1- Alta empleado.\n");
 	printf("2- Modificar empleado.\n");
 	printf("3- Baja empleado.\n");
 	printf("4- Informar.\n");
@@ -180,7 +180,7 @@ int submenuInformes() {
 
 	system("cls");
 
-	printf("Seleccioone una opcion:\n\n");
+	printf("\n\nSeleccioone una opcion:\n\n");
 	printf("1- Listar por apellido y sector.\n");
 	printf(
 			"2- Total y promedio de salarios, y cuantos empleados superan el salario promedio.\n");

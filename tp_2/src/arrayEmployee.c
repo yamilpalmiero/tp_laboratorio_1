@@ -15,7 +15,7 @@ int initEmployees(Employee *list, int len) {
 	if (list != NULL && len > 0) {
 		for (i = 0; i < len; i++) {
 			list[i].isEmpty = 1;
-			retorno = 0;
+			retorno = 1;
 		}
 	}
 	return retorno;
@@ -38,8 +38,7 @@ int buscarLibre(Employee *list, int len, int *posicion) {
 	return retorno;
 }
 //----------------------------------------------------------------------------------------------------------
-int addEmployee(Employee *list, int len, int id, char name[], char lastName[],
-		float salary, int sector) {
+int addEmployee(Employee *list, int len) {
 	int retorno = -1;
 	int posicion;
 
@@ -47,7 +46,7 @@ int addEmployee(Employee *list, int len, int id, char name[], char lastName[],
 		if (buscarLibre(list, len, &posicion) == -1) {
 			printf("\nNo hay lugares vacios.");
 		} else {
-			list[posicion].id = id;
+			list[posicion].id = posicion;
 			utn_getCadena(list[posicion].name, "\nIngrese nombre: ", "\nError.",
 					1, TAM, 2);
 			utn_getCadena(list[posicion].lastName, "\nIngrese apellido: ",
@@ -154,8 +153,46 @@ int removeEmployee(Employee *list, int len) {
 	return retorno;
 }
 //----------------------------------------------------------------------------------------------------------
-int sortEmployees(Employee *list, int len, int order) {
-	return 0;
+int sortEmployees(Employee *list, int len, int order1, int order2) {
+	int retorno = -1;
+	int i;
+	Employee buffer;
+	int flagSwap;
+
+	if (list != NULL && len >= 0) {
+
+		do {
+			flagSwap = 0;
+			for (i = 1; i < len - 1; i++) { //Ordena alfabeticamente por apellido
+				if (((strcmp(list[i].lastName, list[i + 1].lastName) < 0)
+						&& order1 == 1) //Ordena de manera ascendente
+						|| ((strcmp(list[i].lastName, list[i + 1].lastName) > 0)
+								&& !order1 == 0)) { //Ordena de manera descendente
+
+					buffer = list[i];
+					list[i] = list[i + 1];
+					list[i + 1] = buffer;
+					flagSwap = 1;
+
+				} else if (strcmp(list[i].lastName, list[i + 1].lastName) //Si tienen mismo apellido ordena por sector
+				== 0) {
+					if (((list[i].sector < list[i + 1].sector) && order2 == 1) //Ordena de manera ascendente
+							|| ((list[i].sector > list[i + 1].sector)
+									&& !order2 == 0)) { //Ordena de manera descendente
+
+						buffer = list[i];
+						list[i] = list[i + 1];
+						list[i + 1] = buffer;
+						flagSwap = 1;
+
+					}
+				}
+			}
+		} while (flagSwap);
+
+		retorno = 0;
+	}
+	return retorno;
 }
 //----------------------------------------------------------------------------------------------------------
 int printEmployees(Employee *list, int len) {
@@ -163,9 +200,6 @@ int printEmployees(Employee *list, int len) {
 	int i;
 	if (list != NULL && len >= 0) {
 		for (i = 0; i < len; i++) {
-			if (list[i].isEmpty == 1) {
-				continue;
-			} else
 				printf(
 						"\nPosicion: %d\nId: %d\nNombre: %s\nApellido: %s\nSalario: %.2f\nSector: %d\n",
 						i, list[i].id, list[i].name, list[i].lastName,
@@ -177,7 +211,8 @@ int printEmployees(Employee *list, int len) {
 	return retorno;
 }
 //----------------------------------------------------------------------------------------------------------
-int CalcularPromedioSalario(Employee *list, int len, float *pResultado) {
+int calcularPromedioSalario(Employee *list, int len, float *pResultado,
+		float *pSuma) {
 	int retorno = -1;
 	int i;
 	float suma = 0;
@@ -190,8 +225,38 @@ int CalcularPromedioSalario(Employee *list, int len, float *pResultado) {
 		}
 	}
 	retorno = 0;
+	*pSuma = suma;
 	*pResultado = suma / contador;
 
 	return retorno;
 }
 //----------------------------------------------------------------------------------------------------------
+int arrayVacio(Employee *list, int len) {
+	int retorno = 1;
+	int i;
+
+	if (list != NULL && len >= 0) {
+		for (i = 0; i < len; i++) {
+			if (list[i].isEmpty == 0) {
+				retorno = 0;
+				break;
+			}
+		}
+	}
+	return retorno;
+}
+//----------------------------------------------------------------------------------------------------------
+int salarioMayorPromedio(Employee *list, int len, float promedio) {
+	int contador = 0;
+	int i;
+
+	if (list != NULL && len >= 0) {
+		for (i = 0; i < len; i++) {
+			if (list[i].salary > promedio) {
+				contador++;
+			}
+		}
+	}
+
+	return contador;
+}

@@ -5,21 +5,77 @@
 #include "utn.h"
 #include "arrayEmployee.h"
 
+#define CANTIDAD_EMPLEADOS 3
+#define ORDEN_ASCENDENTE 1
+#define ORDEN_DESCENDENTE 0
+
 int main(void) {
 	setbuf(stdout, NULL);
 
-	char nombre[51];
-	float salario;
+	Employee list[CANTIDAD_EMPLEADOS];
+	int opcionMenu;
+	int opcionSubmenu;
+	float sumaSalarios;
+	float promedioSalarios;
 
-	if (utn_getCadena(nombre, "\nIngrese nombre: ", "\nError.", 1, 51, 2)
-			== 0) {
-		printf("\nNombre: %s", nombre);
+	if (initEmployees(list, CANTIDAD_EMPLEADOS)) {
+		printf("\nSe inicializo correctamente.");
+	} else {
+		printf("\nError al inicializar.");
 	}
 
-	if (utn_getFlotante(&salario, "\nIngrese salario: ", "\nError.", 1,
-			10000000, 2) == 0) {
-		printf("\nSalario: %.2f", salario);
-	}
+	do {
+		utn_getEntero(&opcionMenu,
+				"\n\n1) Alta \n2) Modificar \n3) Baja \n4) Informar \n5) Salir\n",
+				"\nError", 1, 5, 2);
+
+		switch (opcionMenu) {
+		case 1:
+			addEmployee(list, CANTIDAD_EMPLEADOS);
+			break;
+		case 2:
+			if (arrayVacio(list, CANTIDAD_EMPLEADOS)) {
+				printf("\nAun no se cargo ningun empleado.\n\n");
+				system("pause");
+			} else {
+				modifyEmployee(list, CANTIDAD_EMPLEADOS);
+			}
+			break;
+		case 3:
+			if (arrayVacio(list, CANTIDAD_EMPLEADOS)) {
+				printf("\nAun no se cargo ningun empleado.\n\n");
+				system("pause");
+			} else {
+				removeEmployee(list, CANTIDAD_EMPLEADOS);
+			}
+			break;
+		case 4:
+			utn_getEntero(&opcionSubmenu,
+					"\n\n1) Empleados ordenados por apellido y sector \n2) Total y promedio de salarios y cuantos empleados superan el salario promedio",
+					"\nError", 1, 2, 2);
+			switch (opcionSubmenu) {
+			case 1:
+				sortEmployees(list, CANTIDAD_EMPLEADOS, ORDEN_ASCENDENTE,
+				ORDEN_ASCENDENTE);
+				printEmployees(list, CANTIDAD_EMPLEADOS);
+				break;
+			case 2:
+				calcularPromedioSalario(list, CANTIDAD_EMPLEADOS,
+						&promedioSalarios, &sumaSalarios);
+				printf(
+						"\nSuma total de salarios: %.2f\nPromedio: %.2f\nEmpleados con salario mayor al promedio: %d",
+						sumaSalarios, promedioSalarios,
+						salarioMayorPromedio(list, CANTIDAD_EMPLEADOS,
+								promedioSalarios));
+				break;
+			}
+			break;
+		case 5:
+			printf("\nSalio!\n\n");
+			system("pause");
+			break;
+		}
+	} while (opcionMenu != 5);
 
 	return EXIT_SUCCESS;
 }

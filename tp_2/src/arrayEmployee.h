@@ -82,7 +82,7 @@ int removeEmployee(Employee *list, int len);
  * \return int Return (-1) if Error [Invalid length or NULL pointer] - (0) if Ok
  *
  */
-int sortEmployees(Employee *list, int len, int order1, int order2);
+int sortEmployees(Employee *list, int len, int order);
 
 /** \brief print the content of employees array
  *

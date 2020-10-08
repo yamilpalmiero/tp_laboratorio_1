@@ -141,6 +141,7 @@ int removeEmployee(Employee *list, int len) {
 	int id;
 
 	if (list != NULL && len > 0) {
+		printEmployees(list, len);
 		utn_getEntero(&id, "\nId a eliminar: ", "\nError.", 0, 999, 2);
 		if (findEmployeeById(list, len, id, &posicion) == -1) {
 			printf("\nEl id ingresado no existe.");
@@ -153,57 +154,52 @@ int removeEmployee(Employee *list, int len) {
 	return retorno;
 }
 //----------------------------------------------------------------------------------------------------------
-int sortEmployees(Employee *list, int len, int order1, int order2) {
+int sortEmployees(Employee *list, int len, int order) {
 	int retorno = -1;
-	int i;
+	int i, j;
 	Employee buffer;
-	int flagSwap;
 
-	if (list != NULL && len >= 0) {
-
-		do {
-			flagSwap = 0;
-			for (i = 1; i < len - 1; i++) { //Ordena alfabeticamente por apellido
-				if (((strcmp(list[i].lastName, list[i + 1].lastName) < 0)
-						&& order1 == 1) //Ordena de manera ascendente
-						|| ((strcmp(list[i].lastName, list[i + 1].lastName) > 0)
-								&& !order1 == 0)) { //Ordena de manera descendente
-
+	if (list != NULL && len > 0) {
+		for (i = 0; i < len - 1; i++) {
+			for (j = i + 1; j < len; j++) {
+				if (strcmp(list[i].lastName, list[j].lastName) > 0
+						&& order == 1) { //Ordena por apellido de manera ascendente (order=1)
 					buffer = list[i];
-					list[i] = list[i + 1];
-					list[i + 1] = buffer;
-					flagSwap = 1;
-
-				} else if (strcmp(list[i].lastName, list[i + 1].lastName) //Si tienen mismo apellido ordena por sector
-				== 0) {
-					if (((list[i].sector < list[i + 1].sector) && order2 == 1) //Ordena de manera ascendente
-							|| ((list[i].sector > list[i + 1].sector)
-									&& !order2 == 0)) { //Ordena de manera descendente
-
+					list[i] = list[j];
+					list[j] = buffer;
+				} else if (strcmp(list[i].lastName, list[j].lastName) < 0
+						&& order == 0) { //Ordena por apellido de manera descendente (order=0)
+					buffer = list[i];
+					list[i] = list[j];
+					list[j] = buffer;
+				} else if (strcmp(list[i].lastName, list[j].lastName) == 0) { //Mismo apellido entonces ordena por sector
+					if (list[i].sector > list[j].sector) {
 						buffer = list[i];
-						list[i] = list[i + 1];
-						list[i + 1] = buffer;
-						flagSwap = 1;
-
+						list[i] = list[j];
+						list[j] = buffer;
 					}
 				}
 			}
-		} while (flagSwap);
-
-		retorno = 0;
+		}
 	}
+
 	return retorno;
 }
 //----------------------------------------------------------------------------------------------------------
 int printEmployees(Employee *list, int len) {
 	int retorno = -1;
 	int i;
-	if (list != NULL && len >= 0) {
+
+	if (list != NULL && len > 0) {
 		for (i = 0; i < len; i++) {
+			if (list[i].isEmpty == 1) {
+				continue;
+			} else {
 				printf(
 						"\nPosicion: %d\nId: %d\nNombre: %s\nApellido: %s\nSalario: %.2f\nSector: %d\n",
 						i, list[i].id, list[i].name, list[i].lastName,
 						list[i].salary, list[i].sector);
+			}
 		}
 		retorno = 0;
 	}

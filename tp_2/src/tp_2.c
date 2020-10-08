@@ -19,14 +19,14 @@ int main(void) {
 	float promedioSalarios;
 
 	if (initEmployees(list, CANTIDAD_EMPLEADOS)) {
-		printf("\nSe inicializo correctamente.");
+		printf("\nLa lista se inicializo correctamente.");
 	} else {
 		printf("\nError al inicializar.");
 	}
 
 	do {
 		utn_getEntero(&opcionMenu,
-				"\n\n1) Alta \n2) Modificar \n3) Baja \n4) Informar \n5) Salir\n",
+				"\n\n***MENU EMPLEADOS***\nElija una opcion:\n\n1) Alta empleado \n2) Modificar empleado\n3) Baja empleado\n4) Informar \n5) Salir\n",
 				"\nError", 1, 5, 2);
 
 		switch (opcionMenu) {
@@ -55,8 +55,7 @@ int main(void) {
 					"\nError", 1, 2, 2);
 			switch (opcionSubmenu) {
 			case 1:
-				sortEmployees(list, CANTIDAD_EMPLEADOS, ORDEN_ASCENDENTE,
-				ORDEN_ASCENDENTE);
+				sortEmployees(list, CANTIDAD_EMPLEADOS, ORDEN_ASCENDENTE);
 				printEmployees(list, CANTIDAD_EMPLEADOS);
 				break;
 			case 2:

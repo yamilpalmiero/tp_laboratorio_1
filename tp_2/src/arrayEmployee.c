@@ -38,22 +38,23 @@ int buscarLibre(Employee *list, int len, int *posicion) {
 	return retorno;
 }
 //----------------------------------------------------------------------------------------------------------
-int addEmployee(Employee *list, int len) {
+int addEmployee(Employee *list, int len, int *contadorID) {
 	int retorno = -1;
 	int posicion;
 
-	if (list != NULL && len > 0) {
+	if (list != NULL && len > 0 && contadorID != NULL) {
 		if (buscarLibre(list, len, &posicion) == -1) {
 			printf("\nNo hay lugares vacios.");
 		} else {
-			list[posicion].id = posicion;
+			(*contadorID)++;
+			list[posicion].id = *contadorID;
 			utn_getCadena(list[posicion].name, "\nIngrese nombre: ", "\nError.",
 					1, TAM, 2);
-			utn_getCadena(list[posicion].lastName, "\nIngrese apellido: ",
+			utn_getCadena(list[posicion].lastName, "Ingrese apellido: ",
 					"\nError.", 1, TAM, 2);
-			utn_getFlotante(&list[posicion].salary, "\nIngrese salario: ",
+			utn_getFlotante(&list[posicion].salary, "Ingrese salario: ",
 					"\nError.", 1, 1000000, 2);
-			utn_getEntero(&list[posicion].sector, "\nIngrese sector: ",
+			utn_getEntero(&list[posicion].sector, "Ingrese sector: ",
 					"\nError.", 1, 100, 2);
 			list[posicion].isEmpty = 0;
 			printf(
@@ -93,7 +94,7 @@ int modifyEmployee(Employee *list, int len) {
 
 	if (list != NULL && len > 0) {
 		printEmployees(list, len);
-		utn_getEntero(&id, "\nId a modificar: ", "\nError", 0, 999, 2);
+		utn_getEntero(&id, "\nId a modificar: ", "\nError", 1, 1000, 2);
 		if (findEmployeeById(list, len, id, &posicion) == -1) {
 			printf("\nEl id ingresado no existe.");
 		} else {

@@ -5,7 +5,7 @@
 #include "utn.h"
 #include "arrayEmployee.h"
 
-#define CANTIDAD_EMPLEADOS 3
+#define CANTIDAD_EMPLEADOS 5
 #define ORDEN_ASCENDENTE 1
 #define ORDEN_DESCENDENTE 0
 
@@ -15,6 +15,7 @@ int main(void) {
 	Employee list[CANTIDAD_EMPLEADOS];
 	int opcionMenu;
 	int opcionSubmenu;
+	int contadorIdEmployee = 0;
 	float sumaSalarios;
 	float promedioSalarios;
 
@@ -31,7 +32,7 @@ int main(void) {
 
 		switch (opcionMenu) {
 		case 1:
-			addEmployee(list, CANTIDAD_EMPLEADOS);
+			addEmployee(list, CANTIDAD_EMPLEADOS, &contadorIdEmployee);
 			break;
 		case 2:
 			if (arrayVacio(list, CANTIDAD_EMPLEADOS)) {

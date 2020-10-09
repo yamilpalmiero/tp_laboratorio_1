@@ -43,7 +43,7 @@ int buscarLibre(Employee *list, int len, int *posicion);
  * \return int Return (-1) if Error [Invalid length or NULL pointer or without
  free space] - (0) if Ok
  **/
-int addEmployee(Employee *list, int len);
+int addEmployee(Employee *list, int len, int *contadorID);
 
 /** \brief find an Employee by Id en returns the index position in array.
  *
@@ -101,7 +101,8 @@ int printEmployees(Employee *list, int length);
  * param pSuma Puntero al espacio donde se guardara la suma
  * return Retorna 0 si OK y -1 si no
  */
-int calcularPromedioSalario(Employee *list, int len, float *pResultado, float *pSuma);
+int calcularPromedioSalario(Employee *list, int len, float *pResultado,
+		float *pSuma);
 
 /*
  * brief Recibe un array de estructuras y la recorre para fijarse si tiene al menos un dato cargado

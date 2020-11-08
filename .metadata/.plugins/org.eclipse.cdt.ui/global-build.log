@@ -1,40 +1,6 @@
-13:41:45 **** Incremental Build of configuration Debug for project tp_3 ****
+20:24:29 **** Incremental Build of configuration Debug for project tp_3 ****
 Info: Internal Builder is used for build
-gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\parser.o" "..\\src\\parser.c" 
-gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Employee.o" "..\\src\\Employee.c" 
-..\src\Employee.c: In function 'employee_getNombre':
-..\src\Employee.c:96:42: warning: argument to 'sizeof' in 'strncpy' call is the same expression as the source; did you mean to use the size of the destination? [-Wsizeof-pointer-memaccess]
-   96 |   strncpy(resultado, this->nombre, sizeof(this->nombre));
-      |                                          ^
-gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\tp_3.o" "..\\src\\tp_3.c" 
-..\src\tp_3.c: In function 'main':
-..\src\tp_3.c:24:5: warning: implicit declaration of function 'controller_loadFromText' [-Wimplicit-function-declaration]
-   24 |     controller_loadFromText("data.csv", listaEmpleados);
-      |     ^~~~~~~~~~~~~~~~~~~~~~~
-..\src\tp_3.c:38:5: warning: implicit declaration of function 'controller_loadFromBinary' [-Wimplicit-function-declaration]
-   38 |     controller_loadFromBinary("data.bin", listaEmpleados);
-      |     ^~~~~~~~~~~~~~~~~~~~~~~~~
-..\src\tp_3.c:51:4: warning: implicit declaration of function 'controller_addEmployee' [-Wimplicit-function-declaration]
-   51 |    controller_addEmployee(listaEmpleados);
-      |    ^~~~~~~~~~~~~~~~~~~~~~
-..\src\tp_3.c:54:4: warning: implicit declaration of function 'controller_ListEmployee' [-Wimplicit-function-declaration]
-   54 |    controller_ListEmployee(listaEmpleados);
-      |    ^~~~~~~~~~~~~~~~~~~~~~~
-..\src\tp_3.c:57:4: warning: implicit declaration of function 'controller_editEmployee' [-Wimplicit-function-declaration]
-   57 |    controller_editEmployee(listaEmpleados);
-      |    ^~~~~~~~~~~~~~~~~~~~~~~
-..\src\tp_3.c:60:4: warning: implicit declaration of function 'controller_removeEmployee' [-Wimplicit-function-declaration]
-   60 |    controller_removeEmployee(listaEmpleados);
-      |    ^~~~~~~~~~~~~~~~~~~~~~~~~
-..\src\tp_3.c:63:4: warning: implicit declaration of function 'controller_sortEmployee' [-Wimplicit-function-declaration]
-   63 |    controller_sortEmployee(listaEmpleados);
-      |    ^~~~~~~~~~~~~~~~~~~~~~~
-..\src\tp_3.c:66:4: warning: implicit declaration of function 'controller_saveAsBinary' [-Wimplicit-function-declaration]
-   66 |    controller_saveAsBinary("data.bin", listaEmpleados);
-      |    ^~~~~~~~~~~~~~~~~~~~~~~
-..\src\tp_3.c:69:4: warning: implicit declaration of function 'controller_saveAsText' [-Wimplicit-function-declaration]
-   69 |    controller_saveAsText("data.csv", listaEmpleados);
-      |    ^~~~~~~~~~~~~~~~~~~~~
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Controller.o" "..\\src\\Controller.c" 
 gcc -o tp_3.exe "src\\Controller.o" "src\\Employee.o" "src\\parser.o" "src\\tp_3.o" "src\\utn.o" 
 c:/mingw/bin/../lib/gcc/mingw32/9.2.0/../../../../mingw32/bin/ld.exe: src\Controller.o: in function `controller_findID':
 C:\Users\yamil\Desktop\YAMIL\Facultad\Programacion_1\tp_laboratorio_1\tp_3\Debug/../src/Controller.c:10: undefined reference to `ll_len'

@@ -89,6 +89,7 @@ int menu();
  */
 int submenuInformes();
 
+
 int getString(char *msg, char *msgError, int min, int max, int reintentos,
 		char *resultado);
 

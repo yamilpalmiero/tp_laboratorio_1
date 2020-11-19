@@ -484,10 +484,58 @@ int ll_sort(LinkedList *this, int (*pFunc)(void*, void*), int order) {
 	return returnAux;
 }
 
-
-int ll_map(LinkedList* this, int (*pFunc)(void*)){
-	int retorno = -1;
+LinkedList* ll_map(LinkedList *this, int (*pFunc)(void *element)) {
 	int i;
-	return retorno;
+
+	if (this != NULL && pFunc != NULL) {
+		for (i = 0; i < (ll_len(this)); i++) {
+			pFunc(ll_get(this, i));
+		}
+	}
+	return this;
 }
 
+/*Ejemplo de funcion Func
+ void calcularPrecioFinal(Producto* p){
+
+ if(p!=NULL){
+ p->precioFinal=p->precioUnitario*p->cantidad;
+ }
+
+ return;
+ }
+ */
+
+LinkedList* ll_filter(LinkedList *this, int (*fn)(void*)) {
+	LinkedList *listaFiltrada = NULL;
+	int i, tam;
+	void *eElemento = NULL;
+
+	if (this != NULL && fn != NULL) {
+		listaFiltrada = ll_newLinkedList();
+		if (listaFiltrada != NULL) {
+			tam = ll_len(this);
+			for (i = 0; i < tam; i++) {
+				eElemento = ll_get(this, i);
+				if (fn(eElemento)) {
+					ll_add(listaFiltrada, eElemento);
+				}
+			}
+		}
+	}
+
+	return listaFiltrada;
+}
+/*Ejemplo de funcion fn
+ int filtrarMujeres(eEmpleado* emp){
+ int retorno=0;
+ if(emp!=NULL){
+ if(eEmpleado->sexo=='f'){
+ retorno=1;
+ }
+ }
+ return retorno;
+ }
+ */
+
+*/
